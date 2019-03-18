@@ -16,4 +16,20 @@ module.exports = {
         id++;
         res.status(200).send(books)
     },
+    update: (req, res) => {
+        let index = null;
+        const { id } = req.params;
+        const { title, author } = req.body;
+        books.forEach((book, i) => {
+            if (book.id === id * 1) {
+                index = i;
+            };
+        });
+        books[index] = {
+            id: books[index].id,
+            title: title || books[index].title,
+            author: author || books[index].author,
+        };
+        req.status(200).send(books);
+    },
 };
